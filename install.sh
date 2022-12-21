@@ -43,7 +43,6 @@ case $sys_bit in
 *)
 	echo -e " 
 	哈哈……这个 ${red}辣鸡脚本${none} 不支持你的系统。 ${yellow}(-_-) ${none}
-
 	备注: 仅支持 Ubuntu 16+ / Debian 8+ / CentOS 7+ 系统
 	" && exit 1
 	;;
@@ -62,7 +61,6 @@ else
 
 	echo -e " 
 	哈哈……这个 ${red}辣鸡脚本${none} 不支持你的系统。 ${yellow}(-_-) ${none}
-
 	备注: 仅支持 Ubuntu 16+ / Debian 8+ / CentOS 7+ 系统
 	" && exit 1
 
@@ -120,7 +118,7 @@ ciphers=(
 )
 
 _load() {
-	local _dir="/etc/v2ray/233boy/v2ray/src/"
+	local _dir="/etc/v2ray/wanhai1/v2ray/src/"
 	. "${_dir}$@"
 }
 _sys_timezone() {
@@ -382,13 +380,10 @@ tls_config() {
 }
 auto_tls_config() {
 	echo -e "
-
 		安装 Caddy 来实现 自动配置 TLS
 		
 		如果你已经安装 Nginx 或 Caddy
-
 		$yellow并且..自己能搞定配置 TLS$none
-
 		那么就不需要 打开自动配置 TLS
 		"
 	echo "----------------------------------------------------------------"
@@ -798,16 +793,16 @@ install_v2ray() {
 			echo
 			exit 1
 		fi
-		mkdir -p /etc/v2ray/233boy/v2ray
-		cp -rf $(pwd)/* /etc/v2ray/233boy/v2ray
+		mkdir -p /etc/v2ray/wanhai1/v2ray
+		cp -rf $(pwd)/* /etc/v2ray/wanhai1/v2ray
 	else
 		pushd /tmp
-		git clone https://github.com/233boy/v2ray -b "$_gitbranch" /etc/v2ray/233boy/v2ray --depth=1
+		git clone https://github.com/wanhai1/v2ray -b "$_gitbranch" /etc/v2ray/wanhai1/v2ray --depth=1
 		popd
 
 	fi
 
-	if [[ ! -d /etc/v2ray/233boy/v2ray ]]; then
+	if [[ ! -d /etc/v2ray/wanhai1/v2ray ]]; then
 		echo
 		echo -e "$red 哎呀呀...克隆脚本仓库出错了...$none"
 		echo
@@ -824,8 +819,8 @@ install_v2ray() {
 }
 
 config() {
-	cp -f /etc/v2ray/233boy/v2ray/config/backup.conf $backup
-	cp -f /etc/v2ray/233boy/v2ray/v2ray.sh $_v2ray_sh
+	cp -f /etc/v2ray/wanhai1/v2ray/config/backup.conf $backup
+	cp -f /etc/v2ray/wanhai1/v2ray/v2ray.sh $_v2ray_sh
 	chmod +x $_v2ray_sh
 
 	v2ray_id=$uuid
@@ -919,14 +914,14 @@ show_config_info() {
 }
 
 install() {
-	if [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f $backup && -d /etc/v2ray/233boy/v2ray ]]; then
+	if [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f $backup && -d /etc/v2ray/wanhai1/v2ray ]]; then
 		echo
 		echo " 大佬...你已经安装 V2Ray 啦...无需重新安装"
 		echo
 		echo -e " $yellow输入 ${cyan}v2ray${none} $yellow即可管理 V2Ray${none}"
 		echo
 		exit 1
-	elif [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f /etc/v2ray/233blog_v2ray_backup.txt && -d /etc/v2ray/233boy/v2ray ]]; then
+	elif [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f /etc/v2ray/233blog_v2ray_backup.txt && -d /etc/v2ray/wanhai1/v2ray ]]; then
 		echo
 		echo "  如果你需要继续安装.. 请先卸载旧版本"
 		echo
@@ -961,7 +956,7 @@ install() {
 }
 uninstall() {
 
-	if [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f $backup && -d /etc/v2ray/233boy/v2ray ]]; then
+	if [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f $backup && -d /etc/v2ray/wanhai1/v2ray ]]; then
 		. $backup
 		if [[ $mark ]]; then
 			_load uninstall.sh
@@ -971,14 +966,13 @@ uninstall() {
 			echo
 		fi
 
-	elif [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f /etc/v2ray/233blog_v2ray_backup.txt && -d /etc/v2ray/233boy/v2ray ]]; then
+	elif [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f /etc/v2ray/233blog_v2ray_backup.txt && -d /etc/v2ray/wanhai1/v2ray ]]; then
 		echo
 		echo -e " $yellow输入 ${cyan}v2ray uninstall${none} $yellow即可卸载${none}"
 		echo
 	else
 		echo -e "
 		$red 大胸弟...你貌似毛有安装 V2Ray ....卸载个鸡鸡哦...$none
-
 		备注...仅支持卸载使用我 (233v2.com) 提供的 V2Ray 一键安装脚本
 		" && exit 1
 	fi
